@@ -1,0 +1,52 @@
+---
+const points = [
+	{
+		num: '01',
+		title: 'Ervaren vakmensen',
+		desc: 'Ploegen met praktijkervaring in uiteenlopende bouw- en elektrotechnische omgevingen.',
+	},
+	{
+		num: '02',
+		title: 'Veilig op de werf',
+		desc: 'Een professionele aanpak met aandacht voor instructies, documentatie en werfdiscipline.',
+	},
+	{
+		num: '03',
+		title: 'Duidelijke afspraken',
+		desc: 'Rechtstreekse communicatie, correcte opvolging en transparante werkwijze.',
+	},
+	{
+		num: '04',
+		title: 'Snel inzetbaar',
+		desc: 'We schakelen flexibel mee met de planning, bezetting en technische noden van uw project.',
+	},
+];
+---
+
+<section class="bg-ink-950 px-6 py-24 sm:py-32">
+	<div class="mx-auto grid max-w-6xl grid-cols-1 gap-16 lg:grid-cols-[1fr_1.2fr]">
+		<div class="reveal">
+			<p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">Waarom A&amp;T Projects</p>
+			<h2 class="text-3xl font-black uppercase leading-tight tracking-tight text-white sm:text-4xl">
+				Betrouwbaarheid <span class="text-brand-500">op de werf.</span>
+			</h2>
+			<p class="mt-6 text-sm leading-relaxed text-cream-100/50 sm:text-base">
+				Wij kennen de realiteit van een werf: deadlines, veranderende planningen en kwaliteit die
+				elke dag opnieuw bewezen moet worden. Daarom werken we praktisch, flexibel en met korte
+				communicatielijnen.
+			</p>
+		</div>
+
+		<div class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2">
+			{
+				points.map((point, i) => (
+					<div class:list={['reveal', `reveal-delay-${(i % 3) + 1}`]}>
+						<span class="text-sm font-black text-brand-500">{point.num}</span>
+						<h3 class="mt-2 font-bold text-white">{point.title}</h3>
+						<p class="mt-2 text-sm leading-relaxed text-cream-100/50">{point.desc}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

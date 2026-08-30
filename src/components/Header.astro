@@ -1,0 +1,93 @@
+---
+const nav = [
+	{ href: '#diensten', label: 'Diensten' },
+	{ href: '#over-ons', label: 'Over ons' },
+	{ href: '#veiligheid', label: 'Veiligheid' },
+	{ href: '#contact', label: 'Contact' },
+];
+
+const ticker = 'DAKWERKEN · ELEKTRICITEIT · BETON & ALGEMENE BOUW · PROFESSIONELE UITVOERING';
+---
+
+<header data-site-header class="fixed top-0 left-0 right-0 z-50 bg-ink-950">
+	<div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+		<a href="#" class="flex items-center gap-3">
+			<img src="/images/logo.png" alt="A&T Projects BV" class="h-11 w-11 sm:h-12 sm:w-12" width="48" height="48" />
+			<span class="hidden flex-col leading-none sm:flex">
+				<span class="text-sm font-bold uppercase tracking-wide text-white">A&amp;T Projects</span>
+				<span class="text-[10px] uppercase tracking-widest text-cream-200/50">sinds 1989</span>
+			</span>
+		</a>
+
+		<nav class="hidden items-center gap-8 md:flex">
+			{
+				nav.map((item) => (
+					<a
+						href={item.href}
+						class="text-sm font-medium text-cream-100/70 transition-colors hover:text-brand-400"
+					>
+						{item.label}
+					</a>
+				))
+			}
+		</nav>
+
+		<a
+			href="#contact"
+			class="hidden rounded-full bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-105 hover:bg-brand-400 md:inline-block"
+		>
+			Contact
+		</a>
+
+		<button data-menu-btn class="text-cream-100 md:hidden" aria-label="Open menu">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+			</svg>
+		</button>
+	</div>
+
+	<div data-mobile-menu class="hidden border-t border-white/10 bg-ink-950 px-6 py-4 md:hidden">
+		<nav class="flex flex-col gap-4">
+			{
+				nav.map((item) => (
+					<a href={item.href} class="text-sm font-medium text-cream-100/70 hover:text-brand-400">
+						{item.label}
+					</a>
+				))
+			}
+			<a href="#contact" class="mt-2 rounded-full bg-brand-500 px-5 py-2.5 text-center text-sm font-semibold text-white">
+				Contact
+			</a>
+		</nav>
+	</div>
+
+	<div class="overflow-hidden border-t border-white/10 bg-ink-900 py-2">
+		<div class="ticker-track flex w-max gap-12 whitespace-nowrap text-[11px] font-semibold uppercase tracking-widest text-cream-100/40">
+			<span>{ticker}</span>
+			<span>{ticker}</span>
+			<span>{ticker}</span>
+			<span>{ticker}</span>
+		</div>
+	</div>
+</header>
+
+<style>
+	.ticker-track {
+		animation: ticker 32s linear infinite;
+	}
+
+	@keyframes ticker {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-25%);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.ticker-track {
+			animation: none;
+		}
+	}
+</style>

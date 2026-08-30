@@ -1,0 +1,21 @@
+---
+const stats = [
+	{ value: '1989', label: 'Vakmanschap sinds' },
+	{ value: 'VCA**', label: 'Bedrijfscertificering' },
+	{ value: '3', label: 'Kernactiviteiten' },
+	{ value: 'BE', label: 'Actief in heel België' },
+];
+---
+
+<section class="border-b border-ink-800 bg-cream-50">
+	<div class="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 py-14 sm:grid-cols-4">
+		{
+			stats.map((stat, i) => (
+				<div class:list={['reveal text-center sm:text-left', `reveal-delay-${(i % 3) + 1}`]}>
+					<p class="text-3xl font-black text-ink-950 sm:text-4xl">{stat.value}</p>
+					<p class="mt-1 text-xs font-medium uppercase tracking-widest text-ink-950/50">{stat.label}</p>
+				</div>
+			))
+		}
+	</div>
+</section>

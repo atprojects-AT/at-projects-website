@@ -1,0 +1,29 @@
+---
+const year = new Date().getFullYear();
+const social = ['LinkedIn', 'Instagram', 'Facebook'];
+---
+
+<footer class="border-t border-white/10 bg-ink-950 px-6 py-10">
+	<div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 sm:flex-row">
+		<div class="flex items-center gap-3">
+			<img src="/images/logo.png" alt="A&T Projects BV" class="h-9 w-9" width="36" height="36" />
+			<span class="text-sm font-bold uppercase tracking-wide text-white">A&amp;T Projects BV</span>
+		</div>
+
+		<div class="flex gap-3">
+			{
+				social.map((label) => (
+					<a
+						href="#"
+						aria-label={label}
+						class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-brand-400 hover:text-brand-400"
+					>
+						<span class="text-xs font-bold">{label[0]}</span>
+					</a>
+				))
+			}
+		</div>
+
+		<p class="text-xs text-cream-100/40">© {year} A&amp;T Projects BV. Alle rechten voorbehouden.</p>
+	</div>
+</footer>
