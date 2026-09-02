@@ -75,6 +75,10 @@ const {
 			menuBtn?.addEventListener('click', () => {
 				mobileMenu?.classList.toggle('hidden');
 			});
+
+			document.querySelector('[data-contact-form]')?.addEventListener('submit', (e) => {
+				e.preventDefault();
+			});
 		</script>
 	</body>
 </html>
