@@ -76,8 +76,37 @@ const {
 				mobileMenu?.classList.toggle('hidden');
 			});
 
-			document.querySelector('[data-contact-form]')?.addEventListener('submit', (e) => {
+			const contactForm = document.querySelector<HTMLFormElement>('[data-contact-form]');
+			contactForm?.addEventListener('submit', async (e) => {
 				e.preventDefault();
+				const form = e.currentTarget as HTMLFormElement;
+				const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+				const statusEl = form.querySelector<HTMLElement>('[data-form-status]');
+
+				if (submitBtn) {
+					submitBtn.disabled = true;
+					submitBtn.textContent = 'Bezig...';
+				}
+
+				try {
+					const res = await fetch('/api/contact', { method: 'POST', body: new FormData(form) });
+					if (!res.ok) throw new Error('request failed');
+					form.reset();
+					if (statusEl) {
+						statusEl.textContent = 'Bedankt! Uw bericht is verzonden, we nemen snel contact op.';
+						statusEl.className = 'mt-3 text-sm font-medium text-white';
+					}
+				} catch {
+					if (statusEl) {
+						statusEl.textContent = 'Er ging iets mis. Probeer het opnieuw of mail ons rechtstreeks.';
+						statusEl.className = 'mt-3 text-sm font-medium text-red-200';
+					}
+				} finally {
+					if (submitBtn) {
+						submitBtn.disabled = false;
+						submitBtn.textContent = 'Verzenden';
+					}
+				}
 			});
 		</script>
 	</body>
