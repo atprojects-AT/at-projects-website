@@ -1,0 +1,103 @@
+---
+const photos = [
+	{
+		file: 'luchtfoto-bouwput-01',
+		alt: 'Luchtfoto van een bouwput met betonnen kelderwanden en bekisting',
+		caption: 'Bouwput & kelderwanden',
+		span: 'col-span-2 row-span-2',
+		w: 900,
+		h: 1200,
+	},
+	{
+		file: 'beton-keerwand-06',
+		alt: 'Afgewerkte betonnen keerwand op de werf',
+		caption: 'Keerwanden in beton',
+		span: '',
+		w: 800,
+		h: 1200,
+	},
+	{
+		file: 'elektriciteitswerken-verdeelbord-01',
+		alt: 'Elektricien van A&T Projects aan een verdeelbord',
+		caption: 'Elektriciteit',
+		span: '',
+		w: 682,
+		h: 1200,
+	},
+	{
+		file: 'bekisting-kolom-03',
+		alt: 'Bekisting voor betonnen kolommen op de werf',
+		caption: 'Bekisting kolommen',
+		span: 'col-span-2',
+		w: 1200,
+		h: 675,
+	},
+	{
+		file: 'elektriciteitswerken-team-01',
+		alt: 'Twee medewerkers van A&T Projects in fluohesjes met logo',
+		caption: 'Onze ploeg',
+		span: '',
+		w: 686,
+		h: 1200,
+	},
+	{
+		file: 'beton-vloerwapening-01',
+		alt: 'Vloerwapening klaar voor het storten van beton',
+		caption: 'Vloerwapening',
+		span: '',
+		w: 800,
+		h: 1200,
+	},
+	{
+		file: 'elektriciteitswerken-werfoverleg-01',
+		alt: 'Werfoverleg bij een elektrisch plan aan de muur',
+		caption: 'Werfoverleg',
+		span: '',
+		w: 718,
+		h: 1200,
+	},
+	{
+		file: 'beton-wapeningsstaven-01',
+		alt: 'Close-up van wapeningsstaven op de werf',
+		caption: 'Wapening',
+		span: '',
+		w: 800,
+		h: 1200,
+	},
+];
+---
+
+<section id="realisaties" class="bg-ink-950 px-6 py-24 sm:py-32">
+	<div class="mx-auto max-w-6xl">
+		<div class="reveal max-w-2xl">
+			<p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">Op de werf</p>
+			<h2 class="text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
+				Ons werk in beeld.
+			</h2>
+			<p class="mt-6 max-w-md text-cream-100/60">
+				Van bouwput tot verdeelbord — een greep uit onze recente werven.
+			</p>
+		</div>
+
+		<div class="reveal mt-14 grid auto-rows-[160px] grid-cols-2 gap-3 sm:auto-rows-[220px] md:grid-cols-4 md:gap-4">
+			{
+				photos.map((photo) => (
+					<figure class:list={['group relative overflow-hidden rounded-xl bg-ink-800', photo.span]}>
+						<img
+							src={`/images/werf/${photo.file}.webp`}
+							alt={photo.alt}
+							width={photo.w}
+							height={photo.h}
+							loading="lazy"
+							decoding="async"
+							class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+						/>
+						<figcaption class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-4 pb-3 pt-10 text-[11px] font-semibold uppercase tracking-widest text-white">
+							{photo.caption}
+						</figcaption>
+					</figure>
+				))
+			}
+		</div>
+	</div>
+</section>
