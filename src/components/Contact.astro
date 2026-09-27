@@ -1,16 +1,13 @@
 ---
+import SocialIcon from './SocialIcon.astro';
+import { social } from '../data/social';
+
 const contact = {
 	email: 'contactatprojects@gmail.com',
 	phones: ['0470 21 93 08', '0497 99 06 06'],
 	addressLine1: 'Kerkstraat 108',
 	addressLine2: '9050 Gentbrugge',
 };
-
-const social = [
-	{ label: 'LinkedIn', href: '#' },
-	{ label: 'Instagram', href: '#' },
-	{ label: 'Facebook', href: '#' },
-];
 ---
 
 <section id="contact" class="relative overflow-hidden bg-brand-500 px-6 py-24 sm:py-32">
@@ -132,9 +129,9 @@ const social = [
 								<a
 									href={item.href}
 									aria-label={item.label}
-									class="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 text-white transition-colors hover:bg-white hover:text-brand-600"
+									class="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-brand-600 hover:ring-white"
 								>
-									<span class="text-xs font-bold">{item.label[0]}</span>
+									<SocialIcon name={item.name} class="h-[18px] w-[18px]" />
 								</a>
 							))
 						}

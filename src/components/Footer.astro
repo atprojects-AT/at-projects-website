@@ -1,6 +1,8 @@
 ---
+import SocialIcon from './SocialIcon.astro';
+import { social } from '../data/social';
+
 const year = new Date().getFullYear();
-const social = ['LinkedIn', 'Instagram', 'Facebook'];
 ---
 
 <footer class="border-t border-white/10 bg-ink-950 px-6 py-10">
@@ -12,13 +14,13 @@ const social = ['LinkedIn', 'Instagram', 'Facebook'];
 
 		<div class="flex gap-3">
 			{
-				social.map((label) => (
+				social.map((item) => (
 					<a
-						href="#"
-						aria-label={label}
-						class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-brand-400 hover:text-brand-400"
+						href={item.href}
+						aria-label={item.label}
+						class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-400 hover:text-brand-400"
 					>
-						<span class="text-xs font-bold">{label[0]}</span>
+						<SocialIcon name={item.name} />
 					</a>
 				))
 			}
