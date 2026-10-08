@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 .vercel
 .env*
+
+# Claude project notes (repo is public, keep local only)
+CLAUDE.md
+.claude/
