@@ -1,25 +1,57 @@
 import type { APIRoute } from 'astro';
+import { contact, formLimits, honeypotField } from '../../data/contact';
 
 export const prerender = false;
 
-const TO_ADDRESS = 'info@atprojects.be';
+const TO_ADDRESS = contact.email;
 const FROM_ADDRESS = 'A&T Projects website <contact@atprojects.be>';
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const json = (body: object, status: number) =>
+	new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } });
 
 export const POST: APIRoute = async ({ request }) => {
-	const data = await request.formData();
-	const name = data.get('name')?.toString().trim();
-	const phone = data.get('phone')?.toString().trim();
-	const email = data.get('email')?.toString().trim();
-	const message = data.get('message')?.toString().trim();
+	let data: FormData;
+	try {
+		data = await request.formData();
+	} catch {
+		return json({ error: 'Ongeldig verzoek.' }, 400);
+	}
+	const field = (key: string) => data.get(key)?.toString().trim() ?? '';
+
+	// Bots fill the hidden field: answer "ok" so they move on, but send nothing.
+	if (field(honeypotField)) return json({ ok: true }, 200);
+
+	const name = field('name').replace(/[\r\n]+/g, ' ');
+	const phone = field('phone');
+	const email = field('email');
+	const message = field('message');
 
 	if (!name || !email || !message) {
-		return new Response(JSON.stringify({ error: 'Vul alle verplichte velden in.' }), { status: 400 });
+		return json({ error: 'Vul alle verplichte velden in.' }, 400);
+	}
+	if (!EMAIL_RE.test(email)) {
+		return json({ error: 'Vul een geldig e-mailadres in.' }, 400);
+	}
+	if (
+		name.length > formLimits.name ||
+		phone.length > formLimits.phone ||
+		email.length > formLimits.email ||
+		message.length > formLimits.message
+	) {
+		return json({ error: 'Een van de velden is te lang.' }, 400);
+	}
+
+	const apiKey = import.meta.env.RESEND_API_KEY;
+	if (!apiKey) {
+		console.error('RESEND_API_KEY is not set');
+		return json({ error: 'Verzenden mislukt.' }, 500);
 	}
 
 	const res = await fetch('https://api.resend.com/emails', {
 		method: 'POST',
 		headers: {
-			Authorization: `Bearer ${import.meta.env.RESEND_API_KEY}`,
+			Authorization: `Bearer ${apiKey}`,
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
@@ -33,8 +65,8 @@ export const POST: APIRoute = async ({ request }) => {
 
 	if (!res.ok) {
 		console.error('Resend error:', await res.text());
-		return new Response(JSON.stringify({ error: 'Verzenden mislukt.' }), { status: 502 });
+		return json({ error: 'Verzenden mislukt.' }, 502);
 	}
 
-	return new Response(JSON.stringify({ ok: true }), { status: 200 });
+	return json({ ok: true }, 200);
 };

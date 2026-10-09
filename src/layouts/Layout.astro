@@ -68,6 +68,8 @@ const schema = {
 	<body class="bg-ink-950 font-sans text-cream-50 antialiased">
 		<slot />
 		<script>
+			import { contact } from '../data/contact';
+
 			const observer = new IntersectionObserver(
 				(entries) => {
 					for (const entry of entries) {
@@ -123,19 +125,32 @@ const schema = {
 					submitBtn.textContent = 'Bezig...';
 				}
 
+				const showError = (text: string) => {
+					if (!statusEl) return;
+					// Never leave a visitor without a way through: always offer the address itself.
+					const mail = document.createElement('a');
+					mail.href = `mailto:${contact.email}`;
+					mail.textContent = contact.email;
+					mail.className = 'underline';
+					statusEl.replaceChildren(`${text} U kunt ons ook rechtstreeks mailen: `, mail, '.');
+					statusEl.className = 'mt-3 text-sm font-medium text-white';
+				};
+
 				try {
 					const res = await fetch('/api/contact', { method: 'POST', body: new FormData(form) });
-					if (!res.ok) throw new Error('request failed');
+					if (!res.ok) {
+						const body = await res.json().catch(() => ({}));
+						// 400 = the visitor can fix the input; anything else = our side failed.
+						showError(res.status === 400 && body.error ? body.error : 'Er ging iets mis bij het verzenden.');
+						return;
+					}
 					form.reset();
 					if (statusEl) {
 						statusEl.textContent = 'Bedankt! Uw bericht is verzonden, we nemen snel contact op.';
 						statusEl.className = 'mt-3 text-sm font-medium text-white';
 					}
 				} catch {
-					if (statusEl) {
-						statusEl.textContent = 'Er ging iets mis. Probeer het opnieuw of mail ons rechtstreeks.';
-						statusEl.className = 'mt-3 text-sm font-medium text-red-200';
-					}
+					showError('Er ging iets mis bij het verzenden.');
 				} finally {
 					if (submitBtn) {
 						submitBtn.disabled = false;
