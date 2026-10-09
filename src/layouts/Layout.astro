@@ -1,5 +1,8 @@
 ---
+import '@fontsource-variable/inter';
 import '../styles/global.css';
+import { contact, toE164 } from '../data/contact';
+import { social } from '../data/social';
 
 interface Props {
 	title: string;
@@ -10,6 +13,32 @@ const {
 	title,
 	description = 'A&T Projects BV is een uitvoerende bouwpartner voor dakwerken, elektriciteit en algemene bouw- en betonwerken in België.',
 } = Astro.props;
+
+const homeUrl = new URL('/', Astro.site).href;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL('/images/og-image.jpg', Astro.site).href;
+
+const schema = {
+	'@context': 'https://schema.org',
+	'@type': 'GeneralContractor',
+	name: contact.name,
+	url: homeUrl,
+	logo: new URL('/images/logo.png', Astro.site).href,
+	image: ogImage,
+	description,
+	email: contact.email,
+	telephone: toE164(contact.phones[0]),
+	foundingDate: contact.foundingYear,
+	address: {
+		'@type': 'PostalAddress',
+		streetAddress: contact.street,
+		postalCode: contact.postalCode,
+		addressLocality: contact.locality,
+		addressCountry: contact.country,
+	},
+	areaServed: { '@type': 'Country', name: 'België' },
+	sameAs: social.map((s) => s.href),
+};
 ---
 
 <!doctype html>
@@ -22,13 +51,19 @@ const {
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-			rel="stylesheet"
-		/>
+		<link rel="canonical" href={canonical} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={contact.name} />
+		<meta property="og:locale" content="nl_BE" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta name="twitter:card" content="summary_large_image" />
 		<title>{title}</title>
+		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 	</head>
 	<body class="bg-ink-950 font-sans text-cream-50 antialiased">
 		<slot />
