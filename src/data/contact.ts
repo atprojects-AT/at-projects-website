@@ -5,9 +5,11 @@ export const contact = {
 	phones: ['0470 21 93 08', '0497 99 06 06'],
 	street: 'Kerkstraat 108',
 	postalCode: '9050',
-	locality: 'Gentbrugge',
+	locality: 'Gent',
 	country: 'BE',
-	foundingYear: '1989',
+	// Same as the Google Business Profile (filled in by the client).
+	foundingDate: '1989-12-01',
+	openingHours: { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '19:00' },
 };
 
 /** Max field lengths of the contact form, enforced in the markup and again in /api/contact. */

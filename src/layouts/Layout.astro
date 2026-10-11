@@ -28,7 +28,13 @@ const schema = {
 	description,
 	email: contact.email,
 	telephone: toE164(contact.phones[0]),
-	foundingDate: contact.foundingYear,
+	foundingDate: contact.foundingDate,
+	openingHoursSpecification: {
+		'@type': 'OpeningHoursSpecification',
+		dayOfWeek: contact.openingHours.days,
+		opens: contact.openingHours.opens,
+		closes: contact.openingHours.closes,
+	},
 	address: {
 		'@type': 'PostalAddress',
 		streetAddress: contact.street,
