@@ -29,6 +29,7 @@ const schema = {
 	email: contact.email,
 	telephone: toE164(contact.phones[0]),
 	foundingDate: contact.foundingDate,
+	vatID: contact.vatNumber.replace(/[\s.]/g, ''),
 	openingHoursSpecification: {
 		'@type': 'OpeningHoursSpecification',
 		dayOfWeek: contact.openingHours.days,

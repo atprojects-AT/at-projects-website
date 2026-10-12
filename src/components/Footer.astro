@@ -1,6 +1,7 @@
 ---
 import SocialIcon from './SocialIcon.astro';
 import { social } from '../data/social';
+import { contact } from '../data/contact';
 
 const year = new Date().getFullYear();
 ---
@@ -26,6 +27,9 @@ const year = new Date().getFullYear();
 			}
 		</div>
 
-		<p class="text-xs text-cream-100/40">© {year} A&amp;T Projects BV. Alle rechten voorbehouden.</p>
+		<div class="text-center text-xs text-cream-100/40 sm:text-right">
+			<p>© {year} A&amp;T Projects BV. Alle rechten voorbehouden.</p>
+			<p class="mt-1">BTW {contact.vatNumber}</p>
+		</div>
 	</div>
 </footer>

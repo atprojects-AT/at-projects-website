@@ -7,6 +7,8 @@ export const contact = {
 	postalCode: '9050',
 	locality: 'Gent',
 	country: 'BE',
+	// Checked in the KBO register (kbopub.economie.fgov.be) on 2026-10-12.
+	vatNumber: 'BE 0439.057.830',
 	// Same as the Google Business Profile (filled in by the client).
 	foundingDate: '1989-12-01',
 	openingHours: { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '19:00' },
