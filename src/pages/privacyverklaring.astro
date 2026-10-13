@@ -1,0 +1,138 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact';
+
+const updated = '13 oktober 2026';
+---
+
+<Layout
+	title="Privacyverklaring — A&T Projects BV"
+	description="Hoe A&T Projects BV omgaat met de gegevens die u via deze website en het contactformulier doorgeeft."
+>
+	<Header />
+	<main class="px-6 pt-40 pb-24 sm:pt-48">
+		<article class="privacy mx-auto max-w-3xl text-cream-100/70">
+			<p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">Privacy</p>
+			<h1 class="text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">Privacyverklaring</h1>
+			<p class="mt-4 text-sm">Laatst bijgewerkt: {updated}</p>
+
+			<h2>1. Wie is verantwoordelijk?</h2>
+			<p>
+				{contact.name}, {contact.street}, {contact.postalCode} {contact.locality}, België<br />
+				Ondernemingsnummer / btw: {contact.vatNumber}<br />
+				E-mail: <a href={`mailto:${contact.email}`}>{contact.email}</a>
+			</p>
+
+			<h2>2. Welke gegevens verwerken we?</h2>
+			<ul>
+				<li>
+					<strong>Via het contactformulier:</strong> uw naam, e-mailadres, telefoonnummer (optioneel) en uw
+					bericht.
+				</li>
+				<li>
+					<strong>Technische gegevens:</strong> bij elk bezoek registreert onze hostingpartner automatisch
+					gegevens zoals uw IP-adres, browser en het tijdstip van het bezoek (serverlogs). We gebruiken die niet
+					om u te identificeren.
+				</li>
+			</ul>
+
+			<h2>3. Waarvoor gebruiken we ze?</h2>
+			<ul>
+				<li>
+					Om uw vraag of offerteaanvraag te beantwoorden en, als u dat wenst, een opdracht voor te bereiden.
+					Rechtsgrond: maatregelen op uw verzoek vóór een overeenkomst en ons gerechtvaardigd belang om vragen
+					te beantwoorden (art. 6.1 b en f AVG).
+				</li>
+				<li>
+					Serverlogs: om de website veilig en werkend te houden (gerechtvaardigd belang, art. 6.1 f AVG).
+				</li>
+			</ul>
+			<p>We gebruiken uw gegevens niet voor marketing en verkopen ze nooit door.</p>
+
+			<h2>4. Wie ontvangt uw gegevens?</h2>
+			<p>We werken met deze dienstverleners, die uw gegevens enkel in onze opdracht verwerken:</p>
+			<ul>
+				<li>
+					<strong>Vercel Inc.</strong> (VS): hosting van de website. Doorgifte buiten de EU gebeurt op basis van
+					passende waarborgen, zoals het EU-VS Data Privacy Framework of de standaardcontractbepalingen van de
+					Europese Commissie.
+				</li>
+				<li>
+					<strong>Resend</strong>: verzending van uw formulierbericht per e-mail, verwerkt in de EU-regio
+					(Ierland).
+				</li>
+				<li><strong>Combell nv</strong> (België): e-mailhosting van {contact.email}.</li>
+			</ul>
+
+			<h2>5. Hoe lang bewaren we ze?</h2>
+			<p>
+				Berichten via het contactformulier bewaren we zolang nodig om uw vraag te behandelen en op te volgen.
+				Leidt uw vraag tot een opdracht, dan bewaren we de gegevens die nodig zijn voor de uitvoering en voor
+				onze wettelijke verplichtingen, zoals de boekhouding.
+			</p>
+
+			<h2>6. Cookies</h2>
+			<p>
+				Deze website gebruikt geen cookies en geen analyse- of trackingtools. De links naar Instagram en
+				Facebook zijn gewone links: pas als u erop klikt, gelden de privacyregels van die platformen.
+			</p>
+
+			<h2>7. Uw rechten</h2>
+			<p>
+				U hebt het recht op inzage, verbetering en verwijdering van uw gegevens, op beperking van de
+				verwerking, op overdraagbaarheid en om bezwaar te maken. Stuur hiervoor een e-mail naar{' '}
+				<a href={`mailto:${contact.email}`}>{contact.email}</a>.
+			</p>
+			<p>
+				Bent u niet tevreden over hoe we met uw gegevens omgaan, dan kunt u een klacht indienen bij de
+				Gegevensbeschermingsautoriteit, Drukpersstraat 35, 1000 Brussel,{' '}
+				<a href="https://www.gegevensbeschermingsautoriteit.be" rel="noopener">www.gegevensbeschermingsautoriteit.be</a>.
+			</p>
+
+			<h2>8. Wijzigingen</h2>
+			<p>We kunnen deze privacyverklaring aanpassen. De datum bovenaan toont de laatste wijziging.</p>
+
+			<p class="mt-12"><a href="/">← Terug naar de homepage</a></p>
+		</article>
+	</main>
+	<Footer />
+</Layout>
+
+<style>
+	.privacy {
+		/* Long Dutch words and the GBA web address must not widen the page on phones. */
+		overflow-wrap: anywhere;
+	}
+	.privacy h2 {
+		margin-top: 2.5rem;
+		margin-bottom: 0.75rem;
+		font-size: 1.125rem;
+		font-weight: 700;
+		color: white;
+	}
+	.privacy p,
+	.privacy ul {
+		margin-top: 0.75rem;
+		line-height: 1.7;
+	}
+	.privacy ul {
+		list-style: disc;
+		padding-left: 1.25rem;
+	}
+	.privacy li + li {
+		margin-top: 0.5rem;
+	}
+	.privacy strong {
+		color: white;
+		font-weight: 600;
+	}
+	.privacy a {
+		color: white;
+		text-decoration: underline;
+	}
+	.privacy a:hover {
+		color: var(--color-brand-400);
+	}
+</style>
