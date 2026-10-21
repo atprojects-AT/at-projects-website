@@ -1,4 +1,5 @@
 ---
+import { contact } from '../data/contact';
 ---
 
 <section class="relative overflow-hidden bg-ink-950 pt-40 pb-24 sm:pt-48 sm:pb-32">
@@ -9,17 +10,19 @@
 
 	<div class="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-6 lg:grid-cols-[1.3fr_1fr]">
 		<div>
-			<p class="reveal mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">
-				Dakwerken &middot; Elektriciteit &middot; Beton &amp; algemene bouw
-			</p>
-
-			<h1 class="reveal reveal-delay-1 text-4xl font-black uppercase leading-[1.05] tracking-tight text-white max-[359px]:text-3xl sm:text-6xl">
-				Gebouwd op <span class="text-brand-500">vakmanschap</span>.
+			<!-- The small line is the h1 so the services and the city reach search engines; the slogan stays the visual headline. -->
+			<h1 class="reveal mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">
+				Dakwerken &middot; Elektriciteit &middot; Beton &amp; bouw{' '}
+				<span class="whitespace-nowrap">in {contact.serviceArea.city} &amp; {contact.serviceArea.region}</span>
 			</h1>
 
+			<p class="reveal reveal-delay-1 text-4xl font-black uppercase leading-[1.05] tracking-tight text-white max-[359px]:text-3xl sm:text-6xl">
+				Gebouwd op <span class="text-brand-500">vakmanschap</span>.
+			</p>
+
 			<p class="reveal reveal-delay-2 mt-6 max-w-xl text-base leading-relaxed text-cream-100/60 sm:text-lg">
-				A&amp;T Projects BV is een uitvoerende bouwpartner voor professionele opdrachtgevers in
-				België. Van dakrenovatie en elektrische installatie tot complete bouwondersteuning:
+				A&amp;T Projects BV is een uitvoerende bouwpartner uit {contact.serviceArea.city} voor professionele
+				opdrachtgevers in heel {contact.serviceArea.region}. Van dakrenovatie en elektrische installatie tot complete bouwondersteuning:
 				duidelijk afgesproken, veilig uitgevoerd.
 			</p>
 

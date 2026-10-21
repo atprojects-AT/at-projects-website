@@ -11,7 +11,7 @@ interface Props {
 
 const {
 	title,
-	description = 'A&T Projects BV is een uitvoerende bouwpartner voor dakwerken, elektriciteit en algemene bouw- en betonwerken in België.',
+	description = 'A&T Projects BV uit Gent: dakwerken, elektriciteitswerken en algemene bouw- en betonwerken in Gent en heel Vlaanderen. VCA**-gecertificeerd, sinds 1989.',
 } = Astro.props;
 
 const homeUrl = new URL('/', Astro.site).href;
@@ -43,7 +43,11 @@ const schema = {
 		addressLocality: contact.locality,
 		addressCountry: contact.country,
 	},
-	areaServed: { '@type': 'Country', name: 'België' },
+	areaServed: [
+		{ '@type': 'City', name: contact.serviceArea.city },
+		{ '@type': 'AdministrativeArea', name: contact.serviceArea.region },
+		{ '@type': 'Country', name: 'België' },
+	],
 	sameAs: social.map((s) => s.href),
 };
 ---

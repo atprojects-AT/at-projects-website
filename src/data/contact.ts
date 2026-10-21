@@ -3,6 +3,10 @@ export const contact = {
 	name: 'A&T Projects BV',
 	email: 'info@atprojects.be',
 	phones: ['0470 21 93 08', '0497 99 06 06'],
+	// Confirmed by the client on 2026-10-21.
+	whatsapp: '0470 21 93 08',
+	// Client's own words (2026-10-21): mostly Gent, then the rest of Flanders.
+	serviceArea: { city: 'Gent', region: 'Vlaanderen' },
 	street: 'Kerkstraat 108',
 	postalCode: '9050',
 	locality: 'Gent',
@@ -22,3 +26,6 @@ export const honeypotField = 'company';
 
 /** '0470 21 93 08' → '+32470219308' */
 export const toE164 = (phone: string) => '+32' + phone.replace(/\s/g, '').replace(/^0/, '');
+
+/** '0470 21 93 08' → 'https://wa.me/32470219308' */
+export const toWhatsAppUrl = (phone: string) => 'https://wa.me/' + toE164(phone).slice(1);
