@@ -3,7 +3,7 @@ const points = [
 	{
 		num: '01',
 		title: 'Veiligheid & compliance',
-		desc: 'A&T Projects BV is VCA**-gecertificeerd voor industriële elektriciteitswerken. Binnen onze organisatie zijn ook VCA VOL- en BA4-attesten aanwezig.',
+		desc: 'A&T Projects BV is VCA**-gecertificeerd voor industriële elektriciteitswerken. Binnen onze organisatie zijn ook VCA Basis-, VCA VOL- en BA4-attesten aanwezig.',
 	},
 	{
 		num: '02',
@@ -22,6 +22,11 @@ const certificates = [
 		title: 'VCA**',
 		issuer: 'Cetradex Certificatie B.V.',
 		logo: '/images/partners/cetradex.png',
+	},
+	{
+		title: 'VCA Basis',
+		issuer: 'Reaxi',
+		logo: '/images/partners/reaxi.png',
 	},
 	{
 		title: 'VCA VOL',
@@ -60,7 +65,7 @@ const certificates = [
 				}
 			</div>
 
-			<div class="reveal reveal-delay-2 grid grid-cols-3 items-start gap-4 self-start">
+			<div class="reveal reveal-delay-2 grid grid-cols-2 items-start gap-4 self-start">
 				{
 					certificates.map((cert) => (
 						<div>
